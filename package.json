@@ -1,7 +1,15 @@
 {
   "name": "standard-api-response-handler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A lightweight and standard API response handler for Node.js and Express.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Coderkube-App/api-response-handler.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Coderkube-App/api-response-handler/issues"
+  },
+  "homepage": "https://github.com/Coderkube-App/api-response-handler#readme",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
