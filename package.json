@@ -1,0 +1,41 @@
+{
+  "name": "api-response-handler",
+  "version": "1.0.0",
+  "description": "A lightweight and standard API response handler for Node.js and Express.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"No tests specified\"",
+    "example": "node example/server.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "api",
+    "response",
+    "handler",
+    "express",
+    "standard",
+    "json",
+    "success",
+    "error",
+    "pagination"
+  ],
+  "author": "Coderkube",
+  "license": "MIT",
+  "peerDependencies": {
+    "express": ">=4.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "express": "^4.18.2",
+    "typescript": "^5.0.0"
+  }
+}
