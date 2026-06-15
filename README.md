@@ -28,13 +28,13 @@ Install the package via your favorite package manager:
 
 ```bash
 # Using npm
-npm install api-response-handler
+npm install standard-api-response-handler
 
 # Using yarn
-yarn add api-response-handler
+yarn add standard-api-response-handler
 
 # Using pnpm
-pnpm add api-response-handler
+pnpm add standard-api-response-handler
 ```
 
 ---
@@ -45,7 +45,7 @@ pnpm add api-response-handler
 Quickly send successful responses with data, optional custom messages, and custom HTTP status codes (defaults to `200`).
 
 ```javascript
-const ApiResponse = require('api-response-handler').default;
+const ApiResponse = require('standard-api-response-handler').default;
 
 app.get('/api/users/:id', async (req, res) => {
   const user = { id: 42, username: 'dev_hero' };
@@ -74,7 +74,7 @@ app.get('/api/users/:id', async (req, res) => {
 Consistently catch and format error responses. Supports custom HTTP status codes (defaults to `500`) and optional validation/error payload arrays.
 
 ```javascript
-const ApiResponse = require('api-response-handler').default;
+const ApiResponse = require('standard-api-response-handler').default;
 
 app.post('/api/register', (req, res) => {
   const errors = { email: 'Email address is invalid' };
@@ -102,7 +102,7 @@ app.post('/api/register', (req, res) => {
 Pass your raw data array and pagination metrics, and let the handler auto-calculate all structural parameters (total pages, current page, limits, and next/prev page flags).
 
 ```javascript
-const ApiResponse = require('api-response-handler').default;
+const ApiResponse = require('standard-api-response-handler').default;
 
 app.get('/api/products', async (req, res) => {
   const page = parseInt(req.query.page) || 1;
@@ -142,7 +142,7 @@ app.get('/api/products', async (req, res) => {
 Fully compatible with TypeScript projects out-of-the-box. Import the helper class and leverage standard typings.
 
 ```typescript
-import ApiResponse, { IApiResponse } from 'api-response-handler';
+import ApiResponse, { IApiResponse } from 'standard-api-response-handler';
 import { Request, Response } from 'express';
 
 interface User {

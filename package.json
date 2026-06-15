@@ -1,5 +1,5 @@
 {
-  "name": "api-response-handler",
+  "name": "standard-api-response-handler",
   "version": "1.0.0",
   "description": "A lightweight and standard API response handler for Node.js and Express.",
   "main": "dist/index.js",
