@@ -98,7 +98,59 @@ app.post('/api/register', (req, res) => {
 
 ---
 
-### 3. Smart Paginated Response
+### 3. Created Response (201)
+Quickly send standard 201 Created responses when a new resource is successfully created.
+
+```javascript
+const ApiResponse = require('standard-api-response-handler').default;
+
+app.post('/api/users', async (req, res) => {
+  const newUser = { id: 43, username: 'new_coder' };
+  
+  // Sends a standard 201 Created response
+  return ApiResponse.created(res, newUser, 'User created successfully');
+});
+```
+
+*Response Payload:*
+```json
+{
+  "success": true,
+  "status": 201,
+  "message": "User created successfully",
+  "data": {
+    "id": 43,
+    "username": "new_coder"
+  }
+}
+```
+
+---
+
+### 4. Not Found Response (404)
+Quickly send standard 404 Not Found responses when a requested resource is not found.
+
+```javascript
+const ApiResponse = require('standard-api-response-handler').default;
+
+app.get('/api/users/:id', async (req, res) => {
+  // If user is not found in database
+  return ApiResponse.notFound(res, 'User not found');
+});
+```
+
+*Response Payload:*
+```json
+{
+  "success": false,
+  "status": 404,
+  "message": "User not found"
+}
+```
+
+---
+
+### 5. Smart Paginated Response
 Pass your raw data array and pagination metrics, and let the handler auto-calculate all structural parameters (total pages, current page, limits, and next/prev page flags).
 
 ```javascript
@@ -138,7 +190,7 @@ app.get('/api/products', async (req, res) => {
 
 ---
 
-### 4. 🦕 TypeScript Usage
+### 6. 🦕 TypeScript Usage
 Fully compatible with TypeScript projects out-of-the-box. Import the helper class and leverage standard typings.
 
 ```typescript
@@ -188,6 +240,58 @@ export const getUserProfile = (req: Request, res: Response) => {
 | `limit` | `number` | **Yes** | — | Number of items per page |
 | `totalItems` | `number` | **Yes** | — | Total item count matching the query in database |
 | `message` | `string` | No | `'Data retrieved successfully'` | Summary success description |
+
+---
+
+### 💡 Specialized Status Code Helper Methods
+
+For cleaner, more semantic code, the library provides helper methods for common HTTP status codes.
+
+#### Success Responses (2xx)
+* **`ApiResponse.created(res, data, message, meta)`** (201 Created)
+* **`ApiResponse.accepted(res, data, message, meta)`** (202 Accepted)
+* **`ApiResponse.noContent(res)`** (204 No Content - returns no response body)
+
+**Usage Example:**
+```javascript
+// Send a 201 Created response
+ApiResponse.created(res, { id: 42 }, 'Resource created successfully');
+
+// Send a 204 No Content response
+ApiResponse.noContent(res);
+```
+
+#### Client Error Responses (4xx)
+* **`ApiResponse.badRequest(res, message, errors)`** (400 Bad Request)
+* **`ApiResponse.unauthorized(res, message, errors)`** (401 Unauthorized)
+* **`ApiResponse.forbidden(res, message, errors)`** (403 Forbidden)
+* **`ApiResponse.notFound(res, message, errors)`** (404 Not Found)
+* **`ApiResponse.methodNotAllowed(res, message, errors)`** (405 Method Not Allowed)
+* **`ApiResponse.conflict(res, message, errors)`** (409 Conflict)
+* **`ApiResponse.unprocessableEntity(res, message, errors)`** (422 Unprocessable Entity)
+* **`ApiResponse.tooManyRequests(res, message, errors)`** (429 Too Many Requests)
+
+**Usage Example:**
+```javascript
+// Send a 403 Forbidden response
+ApiResponse.forbidden(res, 'You do not have access to this resource');
+
+// Send a 422 Unprocessable Entity response with details
+ApiResponse.unprocessableEntity(res, 'Validation failed', { email: 'Email already exists' });
+```
+
+#### Server Error Responses (5xx)
+* **`ApiResponse.internalServerError(res, message, errors)`** (500 Internal Server Error)
+* **`ApiResponse.notImplemented(res, message, errors)`** (501 Not Implemented)
+* **`ApiResponse.badGateway(res, message, errors)`** (502 Bad Gateway)
+* **`ApiResponse.serviceUnavailable(res, message, errors)`** (503 Service Unavailable)
+* **`ApiResponse.gatewayTimeout(res, message, errors)`** (504 Gateway Timeout)
+
+**Usage Example:**
+```javascript
+// Send a 503 Service Unavailable response
+ApiResponse.serviceUnavailable(res, 'Database connection lost', databaseError);
+```
 
 ---
 
