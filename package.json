@@ -1,6 +1,10 @@
 {
   "name": "standard-api-response-handler",
+<<<<<<< HEAD
   "version": "1.1.0",
+=======
+  "version": "1.0.1",
+>>>>>>> 60f5d66a82e727d0605132948118acae96f40579
   "description": "A lightweight and standard API response handler for Node.js and Express.",
   "repository": {
     "type": "git",
